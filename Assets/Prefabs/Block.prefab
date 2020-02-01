@@ -104,6 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7224451555860747331}
   - component: {fileID: 7224451555860747328}
+  - component: {fileID: 3828661464505082359}
   m_Layer: 8
   m_Name: 2D Elements
   m_TagString: Untagged
@@ -175,3 +176,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3828661464505082359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7224451555860747330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aec278cb94e16a469b3e7b57d36dd2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aloneSprite: {fileID: 4663161075884528801, guid: 2c01ed2fdd781a242b3f039f0f5e57f3,
+    type: 3}
+  leftEdgeSprite: {fileID: 1733404789521750851, guid: 2c01ed2fdd781a242b3f039f0f5e57f3,
+    type: 3}
+  middleSprite: {fileID: -7169570129212602806, guid: 2c01ed2fdd781a242b3f039f0f5e57f3,
+    type: 3}
+  rightEdgeSprite: {fileID: -3535125022607410227, guid: 2c01ed2fdd781a242b3f039f0f5e57f3,
+    type: 3}
+  blocksLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
