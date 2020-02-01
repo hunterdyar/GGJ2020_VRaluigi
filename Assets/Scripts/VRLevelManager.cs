@@ -40,11 +40,12 @@ public class VRLevelManager : MonoBehaviour
             {
                 for (int k = 0; k < levelState.Depth; k++)
                 {
+                    var pos = levelState.getCubePos(i, j, k);
+                    _cubes[i, j, k] = Instantiate(cube, pos, Quaternion.identity);
+                    _cubes[i, j, k].transform.parent = this.transform;
                     if (levelState.hasCube(i, j, k))
                     {
-                        var pos = levelState.getCubePos(i, j, k);
-                        _cubes[i, j, k] = Instantiate(cube, pos, Quaternion.identity);
-                        _cubes[i, j, k].transform.parent = this.transform;
+                        _cubes[i, j, k].SetActive(false);
                     }
                 }
             }
