@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VRLevelManager : MonoBehaviour
 {
-    public TableScriptableObj levelState;
+    public LevelScriptableObj levelState;
 
     public GameObject cube;
     // Start is called before the first frame update

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelGenerator2D : MonoBehaviour
 {
-    public TableScriptableObj table;
+    public LevelScriptableObj table;
     public GameObject blockPrefab;
     void Start()
     {
@@ -24,6 +24,6 @@ public class LevelGenerator2D : MonoBehaviour
             DestroyImmediate(c.gameObject);//destroy all children NOW.
         }
         //
-        table.generateCubes(transform,blockPrefab,1);
+        // table.generateCubes(transform,blockPrefab,1);
     }
 }

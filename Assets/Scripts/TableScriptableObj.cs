@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/TableScriptableObject", order = 1)]
-public class TableScriptableObj : ScriptableObject
+public class LevelScriptableObj : ScriptableObject
 {
     public const int ROW = 10;
     public const int COL = 20;
     public const int DEP = 1;
     public const float cubeSize = 0.1f;
-
-    public TableScriptableObj()
-    {
-    }
 
     public Transform Origin
     {
@@ -77,6 +73,9 @@ public class TableScriptableObj : ScriptableObject
             {
                 for (int k = 0; k < DEP; k++)
                 {
+                    if (Vector3.Distance(obj.position, getCubePos(i,j,k)) < minDist) {
+
+                    }
 
                 }
             }
