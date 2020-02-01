@@ -45,12 +45,13 @@ public class VRLevelManager : MonoBehaviour
                     _cubes[i, j, k].transform.parent = this.transform;
                     if (levelState.hasCube(i, j, k))
                     {
-                        _cubes[i, j, k].SetActive(false);
+                        _cubes[i, j, k].GetComponent<MeshRenderer>().enabled = false;
                     }
                 }
             }
         }
     }
+
 
     private GameObject[,,] _cubes;
 
