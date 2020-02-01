@@ -11,6 +11,7 @@ public class PlatformerController : MonoBehaviour
     float timeSinceJumpPressed;
     bool grounded;
     Vector3 newLevelPos;
+    public FloatReference furthestCameraLeftBound;
     public Transform levelParent;
     public Vector2Reference playerPosition;
     public float preCoyoteTime;
@@ -91,8 +92,18 @@ public class PlatformerController : MonoBehaviour
         //Move the player
         //Update position reference
         animator.SetFloat("speed",vel.magnitude);
+        if(playerPosition.Value.x>furthestCameraLeftBound.Value)
+        {
+            playerPosition.Value = playerPosition.Value+(Vector2)vel*Time.deltaTime;
+        }else{
+            if(vel.x < 0){
+                playerPosition.Value = playerPosition.Value+Vector2.up*vel.y*Time.deltaTime;
+            }else{
+                //wait what
+                playerPosition.Value = playerPosition.Value+(Vector2)vel*Time.deltaTime;
+            }
+        }
         
-        playerPosition.Value = playerPosition.Value+(Vector2)vel*Time.deltaTime;
         //Update player Y
         transform.position = new Vector3(playerPosition.Value.x,playerPosition.Value.y,transform.position.z);
 
@@ -105,7 +116,6 @@ public class PlatformerController : MonoBehaviour
     {
         Vector3 nextFrame = vel*Time.deltaTime;
         RaycastHit hitInfo = new RaycastHit();
-        bool didCoyote = false;
         if(Physics.BoxCast(transform.position,transform.localScale/2,nextFrame,out hitInfo,Quaternion.identity,nextFrame.magnitude,layerMask))
         {
             if(Vector3.Angle(Vector3.up,hitInfo.normal) < resetAngle)//<90 vertical, <180 wall-reset
