@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using ScriptableObjectArchitecture;
 public class PlatformerController : MonoBehaviour
 {
     int jumps;
@@ -10,6 +10,9 @@ public class PlatformerController : MonoBehaviour
     float timeSinceGrounded;
     float timeSinceJumpPressed;
     bool grounded;
+    Vector3 newLevelPos;
+    public Transform levelParent;
+    public Vector2Reference playerPosition;
     public float preCoyoteTime;
     public float postCoyoteTime;
     public LayerMask layerMask;
@@ -22,6 +25,7 @@ public class PlatformerController : MonoBehaviour
     bool ignoreFriction = false;
     void Start()
     {
+        playerPosition.Value = (Vector2)transform.position;
         grounded = false;
         timeSinceGrounded = 0;
         timeSinceJumpPressed = 0;
@@ -70,12 +74,22 @@ public class PlatformerController : MonoBehaviour
         CheckCollision();//also friction
 
         //Move the player
-        transform.position = transform.position+vel*Time.deltaTime;
+        //Update position reference
+        playerPosition.Value = playerPosition.Value+(Vector2)vel*Time.deltaTime;
+        //Update player Y
+        transform.position = new Vector3(playerPosition.Value.x,playerPosition.Value.y,transform.position.z);
+        //Update level X in LateUpdate
+      // 
+    }
+    void FixedUpdate()
+    {
+    //    levelParent.GetComponent<Rigidbody>().MovePosition(levelParent.position + Vector3.left*vel.x*Time.fixedDeltaTime);
     }
     void CheckCollision()
     {
         Vector3 nextFrame = vel*Time.deltaTime;
         RaycastHit hitInfo = new RaycastHit();
+        bool didCoyote = false;
         if(Physics.BoxCast(transform.position,transform.localScale/2,nextFrame,out hitInfo,Quaternion.identity,nextFrame.magnitude,layerMask))
         {
             if(Vector3.Angle(Vector3.up,hitInfo.normal) < resetAngle)//<90 vertical, <180 wall-reset
@@ -85,15 +99,18 @@ public class PlatformerController : MonoBehaviour
                 if(timeSinceJumpPressed < preCoyoteTime)
                 {
                     //we meant to press the jump button JUST a moment ago, right before landing.
-                    Jump();
-                    return;//friction breaks the whole coyote time thing lol.
+                    StartCoroutine(JumpAtEndOfFrame());
+                    
                 }
             }else{
                 grounded = false;
             }
 
             Vector3 antiForce = Vector3.Project(vel,hitInfo.normal);
-            CheckFriction(hitInfo.normal);
+            // if(!didCoyote)
+            // {
+                CheckFriction(hitInfo.normal);
+            // }
             //
             vel = vel - antiForce;
 
@@ -122,5 +139,12 @@ public class PlatformerController : MonoBehaviour
     void LateUpdate()
     {
         ignoreFriction = false;
+        // newLevelPos = levelParent.position + Vector3.left*vel.x*Time.deltaTime;
+        //levelParent.position = newLevelPos;
+    }
+    IEnumerator JumpAtEndOfFrame()
+    {
+        yield return new WaitForEndOfFrame();
+        Jump();
     }
 }
