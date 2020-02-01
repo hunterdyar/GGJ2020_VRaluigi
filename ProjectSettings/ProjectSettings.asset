@@ -650,6 +650,7 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
+    Collab: 1
     UNet: 1
   luminIcon:
     m_Name: 
@@ -663,10 +664,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: eaef0b6c-ee79-42f7-b1c7-9ed681db4a8c
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: GGJ2020_VRaluigi (1)
+  organizationId: wqz9822
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
