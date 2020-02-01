@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class TableManager : MonoBehaviour
 {
+    public TableScriptableObj tableState;
+
     public GameObject cube;
     // Start is called before the first frame update
     void Start()
     {
-        tableState = ScriptableObject.CreateInstance<TableScriptableObj>();
+        //tableState = ScriptableObject.CreateInstance<TableScriptableObj>();
         tableState.generateRandomLayout();
         tableState.generateCubes(this.transform, cube);
         var layout = tableState.getLayout();
@@ -25,5 +27,4 @@ public class TableManager : MonoBehaviour
 
     }
 
-    private TableScriptableObj tableState;
 }

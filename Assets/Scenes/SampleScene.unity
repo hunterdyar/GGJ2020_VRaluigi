@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44589657, g: 0.49563342, b: 0.57437813, a: 1}
+  m_IndirectSpecularColor: {r: 0.44589597, g: 0.4956327, b: 0.5743771, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -385,6 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14fb452e2ca6da741b3c78987f3505f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tableState: {fileID: 11400000, guid: 239f88edc01fbe044ba9818f7d843865, type: 2}
   cube: {fileID: 7224451554926650156, guid: 092503be27543134f824950bb3a0340e, type: 3}
 --- !u!1 &705507993
 GameObject:
