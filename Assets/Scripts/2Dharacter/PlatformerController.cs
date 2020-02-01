@@ -7,6 +7,11 @@ public class PlatformerController : MonoBehaviour
     int jumps;
     Vector3 vel;
     float resetAngle = 45;
+    float timeSinceGrounded;
+    float timeSinceJumpPressed;
+    bool grounded;
+    public float preCoyoteTime;
+    public float postCoyoteTime;
     public LayerMask layerMask;
     public float gravity;
     public float movementSpeed;
@@ -17,6 +22,9 @@ public class PlatformerController : MonoBehaviour
     bool ignoreFriction = false;
     void Start()
     {
+        grounded = false;
+        timeSinceGrounded = 0;
+        timeSinceJumpPressed = 0;
         jumps = 0;
         if(wallsResetJumps)
         {
@@ -35,14 +43,27 @@ public class PlatformerController : MonoBehaviour
     }
     public void Jump()
     {
-        if(jumps < 2)
+        timeSinceJumpPressed = 0;
+
+        if(grounded || timeSinceGrounded<postCoyoteTime)
         {
             vel = new Vector3(vel.x,jumpForce,0);
-            jumps++;
+        }else{
+            if(jumps<1)//jumps = air-jumps
+            {
+                vel = new Vector3(vel.x,jumpForce,0);
+                jumps++;
+            }
         }
     }
     void Update()
     {
+        if(grounded)
+        {
+            jumps = 0;
+        }
+        timeSinceGrounded = timeSinceGrounded + Time.deltaTime;
+        timeSinceJumpPressed = timeSinceJumpPressed + Time.deltaTime;
         //gravity Force
         vel = vel + new Vector3(0,-gravity,0)*Time.deltaTime;
 
@@ -59,13 +80,26 @@ public class PlatformerController : MonoBehaviour
         {
             if(Vector3.Angle(Vector3.up,hitInfo.normal) < resetAngle)//<90 vertical, <180 wall-reset
             {
-                jumps = 0;
+                grounded = true;
+                timeSinceGrounded = 0;
+                if(timeSinceJumpPressed < preCoyoteTime)
+                {
+                    //we meant to press the jump button JUST a moment ago, right before landing.
+                    Jump();
+                    return;//friction breaks the whole coyote time thing lol.
+                }
+            }else{
+                grounded = false;
             }
+
             Vector3 antiForce = Vector3.Project(vel,hitInfo.normal);
             CheckFriction(hitInfo.normal);
             //
             vel = vel - antiForce;
 
+        }else
+        {
+            grounded = false;
         }
     }
     void CheckFriction(Vector3 frictionNormal)
