@@ -38,8 +38,11 @@ public class TableScriptableObj : ScriptableObject
             }
         }
     }
-
     public void generateCubes(Transform origin, GameObject cube)
+    {
+        generateCubes(origin,cube,cubeSize);//float cubes.
+    }
+    public void generateCubes(Transform origin, GameObject cube, float cubeSize)
     {
         for (int i = 0; i < ROW; i++)
         {
@@ -51,7 +54,7 @@ public class TableScriptableObj : ScriptableObject
                     {
                         var pos = origin.position + new Vector3(j * cubeSize, i * cubeSize, k * cubeSize);
                         var newCube = Instantiate(cube, pos, Quaternion.identity);
-                        newCube.transform.parent = origin;
+                        newCube.transform.SetParent(origin,true);
                     }
                 }
             }

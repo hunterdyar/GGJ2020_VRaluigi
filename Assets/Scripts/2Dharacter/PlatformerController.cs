@@ -105,7 +105,6 @@ public class PlatformerController : MonoBehaviour
     {
         Vector3 nextFrame = vel*Time.deltaTime;
         RaycastHit hitInfo = new RaycastHit();
-        bool didCoyote = false;
         if(Physics.BoxCast(transform.position,transform.localScale/2,nextFrame,out hitInfo,Quaternion.identity,nextFrame.magnitude,layerMask))
         {
             if(Vector3.Angle(Vector3.up,hitInfo.normal) < resetAngle)//<90 vertical, <180 wall-reset
