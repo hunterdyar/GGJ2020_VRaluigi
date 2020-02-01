@@ -3859,7 +3859,7 @@ GameObject:
   - component: {fileID: 1519383526}
   - component: {fileID: 1519383530}
   - component: {fileID: 1519383529}
-  - component: {fileID: 1519383531}
+  - component: {fileID: 1519383532}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4002,7 +4002,7 @@ MonoBehaviour:
   - TargetTransform: {fileID: 1740305763}
     TargetInfluenceH: 1
     TargetInfluenceV: 1
-    TargetOffset: {x: 0, y: 0}
+    TargetOffset: {x: -0.5, y: 0}
   CenterTargetOnStart: 1
   Axis: 0
   UpdateType: 0
@@ -4021,7 +4021,7 @@ MonoBehaviour:
   IsCameraPositionTopBounded: 0
   IsCameraPositionBottomBounded: 0
   GameCamera: {fileID: 1519383527}
---- !u!114 &1519383531
+--- !u!114 &1519383532
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4030,19 +4030,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1519383525}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c17020d0b9b514c5ea3b8251d0c4ee6a, type: 3}
+  m_Script: {fileID: 11500000, guid: d7b9c22c96ab04d479afeb29c7b9bfc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _pc2D: {fileID: 1519383530}
-  Progressive: 1
-  SpeedMultiplier: 1
-  TransitionSmoothness: 0.5
-  MaintainInfluenceOnStop: 1
-  MovementThreshold: {x: 0, y: 0}
-  LeftFocus: 0.25
-  RightFocus: 0.25
-  TopFocus: 0.25
-  BottomFocus: 0.25
+  CameraWindowRect:
+    serializedVersion: 2
+    x: -0.3
+    y: 0
+    width: 0.4
+    height: 0.3
+  IsRelativeSizeAndPosition: 1
 --- !u!1 &1521950514
 GameObject:
   m_ObjectHideFlags: 0
@@ -4415,6 +4413,10 @@ MonoBehaviour:
     _useConstant: 0
     _constantValue: {x: 0, y: 0, z: 0}
     _variable: {fileID: 11400000, guid: 534416ba0fd60e342b04a5f46488383f, type: 2}
+  furthestLeftCamBounds:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 81ca938300cc5c647829664a59fa262f, type: 2}
 --- !u!4 &1642640377
 Transform:
   m_ObjectHideFlags: 0
@@ -5933,5 +5935,17 @@ PrefabInstance:
       propertyPath: levelParent
       value: 
       objectReference: {fileID: 1514890098}
+    - target: {fileID: 5354995674566299030, guid: 3b8eded63685b9b40923e2f3bd2db977,
+        type: 3}
+      propertyPath: furthestLeftOfCamera._variable
+      value: 
+      objectReference: {fileID: 11400000, guid: 81ca938300cc5c647829664a59fa262f,
+        type: 2}
+    - target: {fileID: 5354995674566299030, guid: 3b8eded63685b9b40923e2f3bd2db977,
+        type: 3}
+      propertyPath: furthestCameraLeftBound._variable
+      value: 
+      objectReference: {fileID: 11400000, guid: 81ca938300cc5c647829664a59fa262f,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b8eded63685b9b40923e2f3bd2db977, type: 3}
