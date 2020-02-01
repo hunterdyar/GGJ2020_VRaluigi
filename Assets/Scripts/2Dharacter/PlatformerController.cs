@@ -23,6 +23,13 @@ public class PlatformerController : MonoBehaviour
     public float friction;
     public bool wallsResetJumps = true;
     bool ignoreFriction = false;
+    Animator animator;
+    SpriteRenderer spriteRenderer;
+    void Awake()
+    {
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
     void Start()
     {
         playerPosition.Value = (Vector2)transform.position;
@@ -44,6 +51,14 @@ public class PlatformerController : MonoBehaviour
         //Set velocity x axis to movement speed????
         vel = new Vector3(dir.x*movementSpeed,vel.y,0);
         ignoreFriction = true;//we moved this frame.
+
+        if(dir.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }else if(dir.x > 0)
+        {   spriteRenderer.flipX = false;
+
+        }
     }
     public void Jump()
     {
@@ -75,11 +90,12 @@ public class PlatformerController : MonoBehaviour
 
         //Move the player
         //Update position reference
+        animator.SetFloat("speed",vel.magnitude);
+        
         playerPosition.Value = playerPosition.Value+(Vector2)vel*Time.deltaTime;
         //Update player Y
         transform.position = new Vector3(playerPosition.Value.x,playerPosition.Value.y,transform.position.z);
-        //Update level X in LateUpdate
-      // 
+
     }
     void FixedUpdate()
     {
