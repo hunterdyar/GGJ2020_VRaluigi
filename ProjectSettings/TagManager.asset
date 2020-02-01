@@ -14,10 +14,10 @@ TagManager:
   - 
   - 
   - 2D_World
-  - 
-  - 
-  - 
-  - 
+  - Parallax1
+  - Parallax2
+  - Parallax3
+  - Parallax4
   - 
   - 
   - 
@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BG
+    uniqueID: 1723243945
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Play
+    uniqueID: 1898310201
     locked: 0
