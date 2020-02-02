@@ -11,11 +11,13 @@ public class LevelGenerator2D : MonoBehaviour
     {
         blocks = new Dictionary<Vector3,GameObject>();
         //DEBUG
-        levelState.generateRandomLayout();
         //
         CreateBlocks();
     }
 
+    void Update(){
+        CreateBlocks();
+    }
     [ContextMenu("Create Blocks")]
     public void CreateBlocks()
     {
@@ -34,7 +36,8 @@ public class LevelGenerator2D : MonoBehaviour
                     }else
                     {
                         GameObject newBlock = Instantiate(blockPrefab, key, Quaternion.identity);
-                        newBlock.transform.parent = this.transform;//SetParent?
+                        newBlock.transform.SetParent(transform,false);
+                        newBlock.transform.position = key;
                         blocks[key] = newBlock;//add to the dictionary
                     }
             }

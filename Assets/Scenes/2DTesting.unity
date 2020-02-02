@@ -341,8 +341,8 @@ Camera:
     m_Bits: 4096
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
+  m_TargetDisplay: 1
+  m_TargetEye: 0
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
@@ -415,8 +415,8 @@ Camera:
     m_Bits: 2048
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
+  m_TargetDisplay: 1
+  m_TargetEye: 0
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
@@ -589,8 +589,8 @@ Camera:
     m_Bits: 1024
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
+  m_TargetDisplay: 1
+  m_TargetEye: 0
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
@@ -1101,8 +1101,8 @@ Camera:
     m_Bits: 512
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
+  m_TargetDisplay: 1
+  m_TargetEye: 0
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
@@ -1422,7 +1422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aeee902dc5649b4dba2ac1cbe9d60a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  table: {fileID: 11400000, guid: 239f88edc01fbe044ba9818f7d843865, type: 2}
+  levelState: {fileID: 0}
   blockPrefab: {fileID: 7224451554926650156, guid: e9a7da0e96d5a2644bc88df14c8acc2c,
     type: 3}
 --- !u!4 &1393492229
@@ -1640,8 +1640,8 @@ Camera:
     m_Bits: 256
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
+  m_TargetDisplay: 1
+  m_TargetEye: 0
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0

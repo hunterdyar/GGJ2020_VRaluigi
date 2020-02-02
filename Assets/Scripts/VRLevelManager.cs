@@ -79,6 +79,7 @@ public class VRLevelManager : MonoBehaviour
     }
 
     private void UnsetCube(int row, int col, int dep)
+    
     {
         // reset cube transform
         _cubes[row, col, dep].transform.position = levelState.getCubePos(row, col, dep);
@@ -88,8 +89,6 @@ public class VRLevelManager : MonoBehaviour
         // set invisible
         _cubes[row, col, dep].GetComponent<MeshRenderer>().enabled = false;
     }
-
-
     private GameObject[,,] _cubes;
 
 }
