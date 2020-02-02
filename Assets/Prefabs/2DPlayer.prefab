@@ -13,13 +13,15 @@ GameObject:
   - component: {fileID: 5354995674566299030}
   - component: {fileID: 5354995674566299029}
   - component: {fileID: 5354995674566299031}
+  - component: {fileID: 1740305764}
+  - component: {fileID: 1740305759}
   m_Layer: 8
   m_Name: 2DPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5354995674566299028
 Transform:
   m_ObjectHideFlags: 0
@@ -29,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 5354995674566298986}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.08, y: 4.18, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -70,10 +72,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1898310201
+  m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: aeba54410cb9b7846a784c705de18ad1, type: 3}
+  m_Sprite: {fileID: -550305788312561705, guid: 75ebb8d8df542974696853d7578699a9,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,6 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26746f6d88b985c46a403e7496069d44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnDeathEvent: {fileID: 11400000, guid: 594f7aa95092c8c49ac90aa1784a37e9, type: 2}
+  furthestCameraLeftBound:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 81ca938300cc5c647829664a59fa262f, type: 2}
   playerPosition:
     _useConstant: 0
     _constantValue: {x: 0, y: 0}
@@ -104,10 +112,11 @@ MonoBehaviour:
   postCoyoteTime: 0.1
   layerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 256
   gravity: 30
   movementSpeed: 8
   jumpForce: 12
+  deathHeightInWorldUnits: -30
   friction: 0.489
   wallsResetJumps: 1
 --- !u!114 &5354995674566299029
@@ -135,3 +144,56 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &1740305764
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5354995674566298986}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7b5a122a759f6fc47af09084b11b5992, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1740305759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5354995674566298986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5758ca93461aeeb4589456a052b07d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DeveloperDescription:
+    _value: 
+  _showDebugFields: 0
+  _enableGizmoDebugging: 1
+  _debugColor: {r: 0, g: 1, b: 1, a: 1}
+  _previouslyRegisteredEvent: {fileID: 11400000, guid: 3af021598ef33c142bb5c224bc921aef,
+    type: 2}
+  _event: {fileID: 11400000, guid: 3af021598ef33c142bb5c224bc921aef, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5354995674566299030}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2

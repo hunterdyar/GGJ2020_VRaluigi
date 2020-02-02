@@ -87,6 +87,7 @@ public class PlatformerController : MonoBehaviour
         {
             if(OnDeathEvent != null){
                 OnDeathEvent.Raise();
+                gameObject.SetActive(false);
             }
         }
         timeSinceGrounded = timeSinceGrounded + Time.deltaTime;
