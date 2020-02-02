@@ -73,7 +73,8 @@ public class LevelScriptableObj : ScriptableObject
             {
                 for (int k = 0; k < DEP; k++)
                 {
-                    if (Vector3.Distance(obj.position, getCubePos(i,j,k)) < minDist) {
+                    if (Vector3.Distance(obj.position, getCubePos(i, j, k)) < minDist)
+                    {
 
                     }
 
@@ -94,6 +95,16 @@ public class LevelScriptableObj : ScriptableObject
         }
     }
 
+    public void addCube(int row, int col, int dep)
+    {
+        _voxelStates[row, col, dep] = 1;
+    }
+
+    public void removeCube(int row, int col, int dep)
+    {
+        _voxelStates[row, col, dep] = 0;
+
+    }
 
     private Transform _origin;
     private int _curDep = 0;

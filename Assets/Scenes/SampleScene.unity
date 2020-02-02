@@ -260,7 +260,6 @@ GameObject:
   - component: {fileID: 306389110}
   - component: {fileID: 306389113}
   - component: {fileID: 306389112}
-  - component: {fileID: 306389111}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -282,19 +281,6 @@ Transform:
   m_Father: {fileID: 1270031428}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &306389111
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 306389109}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &306389112
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -352,6 +338,7 @@ GameObject:
   m_Component:
   - component: {fileID: 607251272}
   - component: {fileID: 607251273}
+  - component: {fileID: 607251274}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -367,7 +354,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 607251271}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.436, y: 0.945, z: 0.645}
+  m_LocalPosition: {x: -0.6, y: 0.723, z: 0.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -385,8 +372,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc8a68b15e76eb469f698cbd33a660b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelState: {fileID: 11400000, guid: 239f88edc01fbe044ba9818f7d843865, type: 2}
+  levelState: {fileID: 11400000, guid: 07bb2fe74c29137488efa53b6a58ba33, type: 2}
   cube: {fileID: 7224451554926650156, guid: 092503be27543134f824950bb3a0340e, type: 3}
+--- !u!114 &607251274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607251271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6781b467167175a45a272c3787c44109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DeveloperDescription:
+    _value: 
+  _showDebugFields: 0
+  _enableGizmoDebugging: 1
+  _debugColor: {r: 0, g: 1, b: 1, a: 1}
+  _previouslyRegisteredEvent: {fileID: 0}
+  _event: {fileID: 11400000, guid: 6642ec3926931f6409dff2ebeaca3131, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 607251273}
+        m_MethodName: OnCubePlaced
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _debugValue: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,7 +554,6 @@ GameObject:
   - component: {fileID: 945555431}
   - component: {fileID: 945555434}
   - component: {fileID: 945555433}
-  - component: {fileID: 945555432}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -555,19 +575,6 @@ Transform:
   m_Father: {fileID: 1893613154}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &945555432
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 945555430}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &945555433
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -710,9 +717,9 @@ SphereCollider:
   m_GameObject: {fileID: 1270031427}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1270031431
 MonoBehaviour:
@@ -1045,7 +1052,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1893613157
 MonoBehaviour:

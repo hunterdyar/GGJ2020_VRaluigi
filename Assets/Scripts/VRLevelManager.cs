@@ -43,6 +43,10 @@ public class VRLevelManager : MonoBehaviour
                     var pos = levelState.getCubePos(i, j, k);
                     _cubes[i, j, k] = Instantiate(cube, pos, Quaternion.identity);
                     _cubes[i, j, k].transform.parent = this.transform;
+                    _cubes[i, j, k].GetComponent<CubeState>().row = i;
+                    _cubes[i, j, k].GetComponent<CubeState>().col = j;
+                    _cubes[i, j, k].GetComponent<CubeState>().dep = k;
+
                     if (levelState.hasCube(i, j, k))
                     {
                         _cubes[i, j, k].GetComponent<MeshRenderer>().enabled = false;
@@ -50,6 +54,21 @@ public class VRLevelManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void OnCubePlaced(GameObject cube)
+    {
+        Debug.Log("Cube placed");
+        var cubeState = cube.GetComponent<CubeState>();
+        Debug.Log($"x{cubeState.row}, y{cubeState.col}, z{cubeState.dep}");
+        levelState.removeCube(cubeState.row, cubeState.col, cubeState.dep);
+        cube.GetComponent<MeshRenderer>().enabled = false;
+        var i = cubeState.lastCollided[0];
+        var j = cubeState.lastCollided[1];
+        var k = cubeState.lastCollided[2];
+        levelState.addCube(cubeState.lastCollided[0], cubeState.lastCollided[1], cubeState.lastCollided[2]);
+        _cubes[i,j,k].GetComponent<MeshRenderer>().enabled = true;
+        
     }
 
 
