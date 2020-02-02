@@ -7,6 +7,7 @@ public class VRLevelManager : MonoBehaviour
 {
     public LevelScriptableObj levelState;
     public GameObject cube;
+    public GameObject level;
 
     public FloatReference leftBound;
     public FloatReference rightBound;
@@ -17,7 +18,8 @@ public class VRLevelManager : MonoBehaviour
     IEnumerator Start()
     {
         levelState.Origin = this.transform;
-        levelState.generateRandomLayout();
+        levelState.loadLayoutFromPrefab(level);
+
         _cubes = new GameObject[levelState.Row, levelState.Col, levelState.Depth];
         generateCubes();
         var layout = levelState.getLayout();
@@ -56,7 +58,7 @@ public class VRLevelManager : MonoBehaviour
                     _cubes[i, j, k].GetComponent<CubeState>().col = j;
                     _cubes[i, j, k].GetComponent<CubeState>().dep = k;
 
-                    if (levelState.hasCube(i, j, k))
+                    if (!levelState.hasCube(i, j, k))
                     {
                         _cubes[i, j, k].GetComponent<MeshRenderer>().enabled = false;
                     }

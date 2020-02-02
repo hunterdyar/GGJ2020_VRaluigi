@@ -56,7 +56,11 @@ public class LevelScriptableObj : ScriptableObject
 
     public Vector3 getCubePos(int row, int col, int dep)
     {
-        return Origin.position + new Vector3(col * cubeSize, row * cubeSize, dep * cubeSize);
+        if (Origin)
+        {
+            return Origin.position + new Vector3(col * cubeSize, row * cubeSize, dep * cubeSize);
+        }
+        return new Vector3(col * cubeSize, row * cubeSize, dep * cubeSize);
     }
 
     public bool hasCube(int row, int col, int dep)
@@ -67,7 +71,7 @@ public class LevelScriptableObj : ScriptableObject
     // return row,col,dep of closest cube
     public int[] getClosestCube(Transform obj)
     {
-        int[] minXYZ = new int[]{0,0,0};
+        int[] minXYZ = new int[] { 0, 0, 0 };
         float minDist = 1000.0f;
         for (int i = 0; i < ROW; i++)
         {
@@ -79,13 +83,14 @@ public class LevelScriptableObj : ScriptableObject
                     if (dist < minDist)
                     {
                         minDist = dist;
-                        minXYZ = new int[]{i,j,k};
+                        minXYZ = new int[] { i, j, k };
                     }
                 }
             }
         }
         return minXYZ;
     }
+
 
     public void generateRandomLayout()
     {
@@ -96,6 +101,16 @@ public class LevelScriptableObj : ScriptableObject
             {
                 _voxelStates[i, j, 0] = Random.Range(0, 2);
             }
+        }
+    }
+
+    public void loadLayoutFromPrefab(GameObject level)
+    {
+        clearLayout();
+        foreach (Transform child in level.transform)
+        {
+            var closestCube = getClosestCube(child);
+            setCube(closestCube[0], closestCube[1], closestCube[2]);
         }
     }
 
@@ -110,10 +125,24 @@ public class LevelScriptableObj : ScriptableObject
 
     }
 
+    public void clearLayout()
+    {
+        for (int i = 0; i < ROW; i++)
+        {
+            for (int j = 0; j < COL; j++)
+            {
+                for (int k = 0; k < DEP; k++)
+                {
+                    _voxelStates[i,j,k] = 0;
+
+                }
+            }
+        }
+
+    }
+
     private Transform _origin;
     private int _curDep = 0;
-    [SerializeField]
-    public int[,,] _voxelStates = new int[ROW, COL, DEP];
-    public int test;
+    private int[,,] _voxelStates = new int[ROW, COL, DEP];
 
 }
