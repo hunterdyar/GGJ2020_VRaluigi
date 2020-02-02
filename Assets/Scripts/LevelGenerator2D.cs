@@ -15,7 +15,7 @@ public class LevelGenerator2D : MonoBehaviour
         blocks = new Dictionary<Vector3,GameObject>();
         //DEBUG
         //
-        CreateBlocks();
+        ForceCreateBlocks();
         //Init the pooler
         for(int i = 0;i<100;i++)
         {
@@ -28,7 +28,6 @@ public class LevelGenerator2D : MonoBehaviour
     void Update(){
         ForceCreateBlocks();
     }
-    [ContextMenu("Create Blocks")]
     public void CreateBlocks()
     {
         //
