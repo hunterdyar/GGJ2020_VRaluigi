@@ -7,12 +7,20 @@ public class LevelGenerator2D : MonoBehaviour
     public LevelScriptableObj levelState;
     public GameObject blockPrefab;
     Dictionary<Vector3,GameObject> blocks;
+    public List<GameObject> allBlocks;
     void Start()
     {
+        allBlocks = new List<GameObject>();
         blocks = new Dictionary<Vector3,GameObject>();
         //DEBUG
         //
         CreateBlocks();
+        for(int i = 0;i<100;i++)
+        {
+            GameObject fill = GameObject.Instantiate(blockPrefab,Vector3.zero,Quaternion.identity,transform);
+            fill.SetActive(false);
+            allBlocks.Add(fill);
+        }
     }
 
     void Update(){
@@ -62,10 +70,10 @@ public class LevelGenerator2D : MonoBehaviour
     }
     public void ForceCreateBlocks()
     {
-        //
-        foreach(Transform child in transform)
+        //disable all the blocks.
+        foreach(GameObject b in allBlocks)
         {
-            Destroy(child.gameObject);
+            b.SetActive(false);
         }
         //
         int k = 0;//What depth is the level at?
@@ -76,9 +84,21 @@ public class LevelGenerator2D : MonoBehaviour
                 if(levelState.hasCube(i,j,k)){
                     //Vector3 key = levelState.getCubePos(i, j, k);
                     Vector3 key = new Vector3(j,i,k);
-                    GameObject newBlock = Instantiate(blockPrefab, key, Quaternion.identity);
-                    newBlock.transform.SetParent(transform);
-                    newBlock.transform.position = newBlock.transform.position+transform.position;
+                    bool didIt = false;
+                    for(int q = 0;q<allBlocks.Count;q++){
+                        if(!allBlocks[q].activeInHierarchy){
+                            didIt = true;
+                            allBlocks[q].transform.position = key+transform.position;
+                            allBlocks[q].SetActive(true);
+                            break;
+                        }
+                    }
+                    if(!didIt){
+                        GameObject newBlock = Instantiate(blockPrefab, key, Quaternion.identity);
+                        newBlock.transform.SetParent(transform);
+                        newBlock.transform.position = newBlock.transform.position+transform.position;
+                        allBlocks.Add(newBlock);
+                    }
                 }
             }
         }
