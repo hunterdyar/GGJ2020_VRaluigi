@@ -7,7 +7,7 @@ public class LevelScriptableObj : ScriptableObject
 {
     public const int ROW = 10;
     public const int COL = 50;
-    public const int DEP = 5;
+    public const int DEP = 1;
     public const float cubeSize = 0.1f;
     public TextAsset level;
 
@@ -56,9 +56,14 @@ public class LevelScriptableObj : ScriptableObject
 
     public Vector3 getCubePos(int row, int col, int dep)
     {
+        /*
         var x = cubeSize / 2.0f + col * cubeSize;
         var y = cubeSize / 2.0f + row * cubeSize;
         var z = cubeSize / 2.0f + dep * cubeSize;
+        */
+        var x =  col * cubeSize;
+        var y =  row * cubeSize;
+        var z =  dep * cubeSize;
         if (Origin)
         {
             return Origin.position + new Vector3(x, y, z);

@@ -8,17 +8,18 @@ public class PlayerGhost : MonoBehaviour
     public Transform levelParent;
     public Vector2Reference playerPosition;
     Vector3 offset;
-   public Vector3 extraOffset;
+    public Vector3 extraOffset;
     IEnumerator Start()
     {
         yield return new WaitForEndOfFrame();//Wait until the player initiates.
         transform.position = (Vector3)playerPosition.Value;
-        offset = levelParent.position-transform.position;
+        offset = levelParent.position - transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = offset + extraOffset+((Vector3)playerPosition.Value)*scaleOffset;
+        var pos = new Vector3(0, playerPosition.Value.y, 0);
+        transform.position = extraOffset + pos * scaleOffset;
     }
 }

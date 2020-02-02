@@ -9,10 +9,13 @@ public class VRLevelManager : MonoBehaviour
     public GameObject cube;
     public GameObject level;
 
-    public FloatReference leftBound;
-    public FloatReference rightBound;
-    public Vector2Reference playerPos;
     public GameEvent InitiateEvent;
+
+    // player avatar movement
+    public float scaleOffset;
+    public Vector2Reference playerPosition;
+    public Vector3 extraOffset;
+
 
     // Start is called before the first frame update
     IEnumerator Start()
@@ -22,24 +25,16 @@ public class VRLevelManager : MonoBehaviour
         _cubes = new GameObject[levelState.Row, levelState.Col, levelState.Depth];
         levelState.generateRandomLayout();
         generateCubes();
-        var layout = levelState.getLayout();
-        /*
-        for (int i = 0; i < layout.GetLength(0); i++)
-        {
-            for (int j = 0; j < layout.GetLength(1); j++)
-            {
-                Debug.Log($"row{i},col{j},cube{layout[i, j]}");
-            }
-        }
-        */
+        this.transform.localScale = new Vector3(0.5f,0.5f,0.5f);
         yield return new WaitForEndOfFrame();
         InitiateEvent.Raise();
-        
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        // move level oppsite to player's x postiion
+        transform.position = extraOffset + new Vector3(-scaleOffset * playerPosition.Value.x, 0, 0);
 
     }
 
@@ -58,6 +53,7 @@ public class VRLevelManager : MonoBehaviour
                     _cubes[i, j, k].GetComponent<CubeState>().row = i;
                     _cubes[i, j, k].GetComponent<CubeState>().col = j;
                     _cubes[i, j, k].GetComponent<CubeState>().dep = k;
+                    //_cubes[i, j, k].transform.localScale = new Vector3(0.1f,0.1f,0.1f);
 
                     if (!levelState.hasCube(i, j, k))
                     {
