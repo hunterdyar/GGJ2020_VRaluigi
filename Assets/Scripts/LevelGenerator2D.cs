@@ -16,7 +16,7 @@ public class LevelGenerator2D : MonoBehaviour
     }
 
     void Update(){
-        CreateBlocks();
+        ForceCreateBlocks();
     }
     [ContextMenu("Create Blocks")]
     public void CreateBlocks()
@@ -29,7 +29,7 @@ public class LevelGenerator2D : MonoBehaviour
             for (int j = 0; j < levelState.Col; j++)
             {
                     //Vector3 key = levelState.getCubePos(i, j, k);
-                    Vector3 key = new Vector3(i,j,k);
+                    Vector3 key = new Vector3(j,i,k);
                     if(blocks.ContainsKey(key))
                     {
                         //a block exists here.
@@ -39,8 +39,7 @@ public class LevelGenerator2D : MonoBehaviour
                         GameObject newBlock = Instantiate(blockPrefab, key, Quaternion.identity);
                         newBlock.transform.SetParent(transform);
                         newBlock.transform.position = newBlock.transform.position+transform.position;
-                        Debug.Log("made block at "+key);
-                        blocks[key] = newBlock;//add to the dictionary
+                        blocks.Add(key,newBlock);
                     }
             }
         }
@@ -50,7 +49,7 @@ public class LevelGenerator2D : MonoBehaviour
         foreach(KeyValuePair<Vector3,GameObject> bl in blocks)
         {
             //If there is no block at this position anymore, we need to destory it.
-            if(!levelState.hasCube((int)bl.Key.x,(int)bl.Key.y,(int)bl.Key.z))
+            if(!levelState.hasCube((int)bl.Key.y,(int)bl.Key.x,(int)bl.Key.z))
             {
                 removeMe.Add(bl.Key);
             }
@@ -59,6 +58,29 @@ public class LevelGenerator2D : MonoBehaviour
         {            
             Destroy(blocks[b1]);
             blocks.Remove(b1);
+        }
+    }
+    public void ForceCreateBlocks()
+    {
+        //
+        foreach(Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+        //
+        int k = 0;//What depth is the level at?
+        for (int i = 0; i < levelState.Row; i++)
+        {
+            for (int j = 0; j < levelState.Col; j++)
+            {
+                if(levelState.hasCube(i,j,k)){
+                    //Vector3 key = levelState.getCubePos(i, j, k);
+                    Vector3 key = new Vector3(j,i,k);
+                    GameObject newBlock = Instantiate(blockPrefab, key, Quaternion.identity);
+                    newBlock.transform.SetParent(transform);
+                    newBlock.transform.position = newBlock.transform.position+transform.position;
+                }
+            }
         }
     }
 }

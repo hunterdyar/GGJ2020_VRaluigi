@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ScriptableObjectArchitecture;
 
 public class VRLevelManager : MonoBehaviour
 {
     public LevelScriptableObj levelState;
-
     public GameObject cube;
+
+    public FloatReference leftBound;
+    public FloatReference rightBound;
+    public Vector2Reference playerPos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +36,7 @@ public class VRLevelManager : MonoBehaviour
     {
 
     }
+
 
     public void generateCubes()
     {
@@ -79,7 +85,6 @@ public class VRLevelManager : MonoBehaviour
     }
 
     private void UnsetCube(int row, int col, int dep)
-    
     {
         // reset cube transform
         _cubes[row, col, dep].transform.position = levelState.getCubePos(row, col, dep);
@@ -89,6 +94,12 @@ public class VRLevelManager : MonoBehaviour
         // set invisible
         _cubes[row, col, dep].GetComponent<MeshRenderer>().enabled = false;
     }
+
+    private void UpdatePlayerPos()
+    {
+
+    }
+
     private GameObject[,,] _cubes;
 
 }
