@@ -21,7 +21,7 @@ public class VRLevelManager : MonoBehaviour
         levelState.Origin = this.transform;
         _cubes = new GameObject[levelState.Row, levelState.Col, levelState.Depth];
         levelState.generateRandomLayout();
-        // generateCubes();
+        generateCubes();
         var layout = levelState.getLayout();
         /*
         for (int i = 0; i < layout.GetLength(0); i++)
