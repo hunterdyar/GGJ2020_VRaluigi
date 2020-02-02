@@ -58,17 +58,35 @@ public class VRLevelManager : MonoBehaviour
 
     public void OnCubePlaced(GameObject cube)
     {
-        Debug.Log("Cube placed");
+        var nearCube = levelState.getClosestCube(cube.transform);
+        Debug.Log($"Near cube, x{nearCube[0]}, y{nearCube[1]}, z{nearCube[2]}");
+        SetCube(nearCube[0], nearCube[1], nearCube[2]);
+
         var cubeState = cube.GetComponent<CubeState>();
-        Debug.Log($"x{cubeState.row}, y{cubeState.col}, z{cubeState.dep}");
-        levelState.removeCube(cubeState.row, cubeState.col, cubeState.dep);
-        cube.GetComponent<MeshRenderer>().enabled = false;
-        var i = cubeState.lastCollided[0];
-        var j = cubeState.lastCollided[1];
-        var k = cubeState.lastCollided[2];
-        levelState.addCube(cubeState.lastCollided[0], cubeState.lastCollided[1], cubeState.lastCollided[2]);
-        _cubes[i,j,k].GetComponent<MeshRenderer>().enabled = true;
-        
+        Debug.Log($"Cube released, x{cubeState.row}, y{cubeState.col}, z{cubeState.dep}");
+        UnsetCube(cubeState.row, cubeState.col, cubeState.dep);
+    }
+
+    private void SetCube(int row, int col, int dep)
+    {
+        // reset cube transform
+        _cubes[row, col, dep].transform.position = levelState.getCubePos(row, col, dep);
+        _cubes[row, col, dep].transform.rotation = Quaternion.identity;
+        // update levelState
+        levelState.setCube(row, col, dep);
+        // set visible
+        _cubes[row, col, dep].GetComponent<MeshRenderer>().enabled = true;
+    }
+
+    private void UnsetCube(int row, int col, int dep)
+    {
+        // reset cube transform
+        _cubes[row, col, dep].transform.position = levelState.getCubePos(row, col, dep);
+        _cubes[row, col, dep].transform.rotation = Quaternion.identity;
+        // update levelstate
+        levelState.unsetCube(row, col, dep);
+        // set invisible
+        _cubes[row, col, dep].GetComponent<MeshRenderer>().enabled = false;
     }
 
 

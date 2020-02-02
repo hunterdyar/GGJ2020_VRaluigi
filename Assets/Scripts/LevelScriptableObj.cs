@@ -66,6 +66,7 @@ public class LevelScriptableObj : ScriptableObject
     // return row,col,dep of closest cube
     public int[] getClosestCube(Transform obj)
     {
+        int[] minXYZ = new int[]{0,0,0};
         float minDist = 1000.0f;
         for (int i = 0; i < ROW; i++)
         {
@@ -73,15 +74,16 @@ public class LevelScriptableObj : ScriptableObject
             {
                 for (int k = 0; k < DEP; k++)
                 {
-                    if (Vector3.Distance(obj.position, getCubePos(i, j, k)) < minDist)
+                    var dist = Vector3.Distance(obj.position, getCubePos(i, j, k));
+                    if (dist < minDist)
                     {
-
+                        minDist = dist;
+                        minXYZ = new int[]{i,j,k};
                     }
-
                 }
             }
         }
-        return new int[] { 0, 0, 0 };
+        return minXYZ;
     }
 
     public void generateRandomLayout()
@@ -95,12 +97,12 @@ public class LevelScriptableObj : ScriptableObject
         }
     }
 
-    public void addCube(int row, int col, int dep)
+    public void setCube(int row, int col, int dep)
     {
         _voxelStates[row, col, dep] = 1;
     }
 
-    public void removeCube(int row, int col, int dep)
+    public void unsetCube(int row, int col, int dep)
     {
         _voxelStates[row, col, dep] = 0;
 
