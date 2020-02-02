@@ -11,6 +11,7 @@ public class PlatformerController : MonoBehaviour
     float timeSinceJumpPressed;
     bool grounded;
     Vector3 newLevelPos;
+    public GameEvent OnDeathEvent;
     public FloatReference furthestCameraLeftBound;
     public Transform levelParent;
     public Vector2Reference playerPosition;
@@ -20,6 +21,7 @@ public class PlatformerController : MonoBehaviour
     public float gravity;
     public float movementSpeed;
     public float jumpForce;
+    public float deathHeightInWorldUnits;
     [Range(0,1)]
     public float friction;
     public bool wallsResetJumps = true;
@@ -81,6 +83,12 @@ public class PlatformerController : MonoBehaviour
         if(grounded)
         {
             jumps = 0;
+        }
+        if(transform.position.y < deathHeightInWorldUnits)
+        {
+            if(OnDeathEvent != null){
+                OnDeathEvent.Raise();
+            }
         }
         timeSinceGrounded = timeSinceGrounded + Time.deltaTime;
         timeSinceJumpPressed = timeSinceJumpPressed + Time.deltaTime;
