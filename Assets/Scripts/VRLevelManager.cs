@@ -15,7 +15,7 @@ public class VRLevelManager : MonoBehaviour
     public GameEvent InitiateEvent;
 
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
         levelState.loadLayoutFromPrefab(level);
         levelState.Origin = this.transform;
@@ -32,6 +32,9 @@ public class VRLevelManager : MonoBehaviour
             }
         }
         */
+        yield return new WaitForEndOfFrame();
+        InitiateEvent.Raise();
+        
     }
 
     // Update is called once per frame
