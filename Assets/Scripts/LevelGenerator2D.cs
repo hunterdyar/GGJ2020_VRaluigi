@@ -8,13 +8,15 @@ public class LevelGenerator2D : MonoBehaviour
     public GameObject blockPrefab;
     Dictionary<Vector3,GameObject> blocks;
     public List<GameObject> allBlocks;
-    void Start()
+    public void Initiate()
     {
+
         allBlocks = new List<GameObject>();
         blocks = new Dictionary<Vector3,GameObject>();
         //DEBUG
         //
         CreateBlocks();
+        //Init the pooler
         for(int i = 0;i<100;i++)
         {
             GameObject fill = GameObject.Instantiate(blockPrefab,Vector3.zero,Quaternion.identity,transform);

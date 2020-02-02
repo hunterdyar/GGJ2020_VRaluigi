@@ -11,9 +11,10 @@ public class VRLevelManager : MonoBehaviour
     public FloatReference leftBound;
     public FloatReference rightBound;
     public Vector2Reference playerPos;
+    public GameEvent InitiateEvent;
 
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
         levelState.Origin = this.transform;
         levelState.generateRandomLayout();
@@ -29,6 +30,8 @@ public class VRLevelManager : MonoBehaviour
             }
         }
         */
+        yield return new WaitForEndOfFrame();
+        InitiateEvent.Raise();
     }
 
     // Update is called once per frame

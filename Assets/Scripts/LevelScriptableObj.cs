@@ -9,6 +9,7 @@ public class LevelScriptableObj : ScriptableObject
     public const int COL = 20;
     public const int DEP = 1;
     public const float cubeSize = 0.1f;
+    public TextAsset level;
 
     public Transform Origin
     {
@@ -88,6 +89,7 @@ public class LevelScriptableObj : ScriptableObject
 
     public void generateRandomLayout()
     {
+        Debug.Log("called random layout");
         for (int i = 0; i < ROW; i++)
         {
             for (int j = 0; j < COL; j++)
@@ -110,6 +112,8 @@ public class LevelScriptableObj : ScriptableObject
 
     private Transform _origin;
     private int _curDep = 0;
-    private int[,,] _voxelStates = new int[ROW, COL, DEP];
+    [SerializeField]
+    public int[,,] _voxelStates = new int[ROW, COL, DEP];
+    public int test;
 
 }
