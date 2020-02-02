@@ -6,7 +6,7 @@ using UnityEngine;
 public class LevelScriptableObj : ScriptableObject
 {
     public const int ROW = 10;
-    public const int COL = 20;
+    public const int COL = 200;
     public const int DEP = 1;
     public const float cubeSize = 0.1f;
     public TextAsset level;
@@ -110,6 +110,7 @@ public class LevelScriptableObj : ScriptableObject
         foreach (Transform child in level.transform)
         {
             var closestCube = getClosestCube(child);
+            Debug.Log($"x{closestCube[0]},y{closestCube[1]},z{closestCube[2]}");
             setCube(closestCube[0], closestCube[1], closestCube[2]);
         }
     }

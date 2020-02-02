@@ -690,7 +690,7 @@ GameObject:
   m_Component:
   - component: {fileID: 691236767}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: Level Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1296,6 +1296,7 @@ GameObject:
   - component: {fileID: 1393492229}
   - component: {fileID: 1393492228}
   - component: {fileID: 1393492230}
+  - component: {fileID: 1393492231}
   m_Layer: 0
   m_Name: 2DLevelManager
   m_TagString: Untagged
@@ -1350,13 +1351,48 @@ MonoBehaviour:
   _showDebugFields: 0
   _enableGizmoDebugging: 1
   _debugColor: {r: 0, g: 1, b: 1, a: 1}
-  _previouslyRegisteredEvent: {fileID: 0}
+  _previouslyRegisteredEvent: {fileID: 11400000, guid: 3af021598ef33c142bb5c224bc921aef,
+    type: 2}
   _event: {fileID: 11400000, guid: 3af021598ef33c142bb5c224bc921aef, type: 2}
   _response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1393492228}
         m_MethodName: Initiate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1393492231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393492227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5758ca93461aeeb4589456a052b07d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DeveloperDescription:
+    _value: 
+  _showDebugFields: 0
+  _enableGizmoDebugging: 1
+  _debugColor: {r: 0, g: 1, b: 1, a: 1}
+  _previouslyRegisteredEvent: {fileID: 11400000, guid: 6642ec3926931f6409dff2ebeaca3131,
+    type: 2}
+  _event: {fileID: 11400000, guid: 6642ec3926931f6409dff2ebeaca3131, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1393492228}
+        m_MethodName: UpdateLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1427,7 +1463,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 20
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1533,7 +1569,7 @@ MonoBehaviour:
   UpdateType: 0
   FollowHorizontal: 1
   HorizontalFollowSmoothness: 0.1
-  FollowVertical: 0
+  FollowVertical: 1
   VerticalFollowSmoothness: 0.15
   OffsetX: 0
   OffsetY: 0
@@ -1734,7 +1770,8 @@ MonoBehaviour:
   _showDebugFields: 0
   _enableGizmoDebugging: 1
   _debugColor: {r: 0, g: 1, b: 1, a: 1}
-  _previouslyRegisteredEvent: {fileID: 0}
+  _previouslyRegisteredEvent: {fileID: 11400000, guid: 3af021598ef33c142bb5c224bc921aef,
+    type: 2}
   _event: {fileID: 11400000, guid: 3af021598ef33c142bb5c224bc921aef, type: 2}
   _response:
     m_PersistentCalls:
@@ -1757,7 +1794,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 5354995675388741908}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1740305758}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26746f6d88b985c46a403e7496069d44, type: 3}
   m_Name: 
@@ -2125,7 +2162,7 @@ PrefabInstance:
     - target: {fileID: 5354995674566299030, guid: 3b8eded63685b9b40923e2f3bd2db977,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b8eded63685b9b40923e2f3bd2db977, type: 3}

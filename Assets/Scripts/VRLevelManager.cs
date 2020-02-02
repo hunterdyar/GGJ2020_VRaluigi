@@ -18,8 +18,8 @@ public class VRLevelManager : MonoBehaviour
     IEnumerator Start()
     {
         levelState.Origin = this.transform;
-        levelState.loadLayoutFromPrefab(level);
-
+       // levelState.loadLayoutFromPrefab(level);
+        levelState.generateRandomLayout();
         _cubes = new GameObject[levelState.Row, levelState.Col, levelState.Depth];
         generateCubes();
         var layout = levelState.getLayout();

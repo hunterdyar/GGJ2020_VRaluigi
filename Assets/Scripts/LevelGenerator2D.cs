@@ -25,7 +25,7 @@ public class LevelGenerator2D : MonoBehaviour
         }
     }
 
-    void Update(){
+    public void UpdateLevel(){
         ForceCreateBlocks();
     }
     public void CreateBlocks()
