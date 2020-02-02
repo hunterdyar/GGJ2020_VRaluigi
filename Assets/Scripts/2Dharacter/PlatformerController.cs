@@ -5,7 +5,7 @@ using ScriptableObjectArchitecture;
 public class PlatformerController : MonoBehaviour
 {
     int jumps;
-    Vector3 vel;
+    Vector2 vel;
     float resetAngle = 45;
     float timeSinceGrounded;
     float timeSinceJumpPressed;
@@ -50,8 +50,8 @@ public class PlatformerController : MonoBehaviour
     {
         dir.Normalize();
         //Set velocity x axis to movement speed????
-        vel = new Vector3(dir.x*movementSpeed,vel.y,0);
-        ignoreFriction = true;//we moved this frame.
+        vel = new Vector2(dir.x*movementSpeed,vel.y);
+       ignoreFriction = true;//we moved this frame.
 
         if(dir.x < 0)
         {
@@ -67,11 +67,11 @@ public class PlatformerController : MonoBehaviour
 
         if(grounded || timeSinceGrounded<postCoyoteTime)
         {
-            vel = new Vector3(vel.x,jumpForce,0);
+            vel = new Vector2(vel.x,jumpForce);
         }else{
             if(jumps<1)//jumps = air-jumps
             {
-                vel = new Vector3(vel.x,jumpForce,0);
+                vel = new Vector2(vel.x,jumpForce);
                 jumps++;
             }
         }
@@ -85,22 +85,23 @@ public class PlatformerController : MonoBehaviour
         timeSinceGrounded = timeSinceGrounded + Time.deltaTime;
         timeSinceJumpPressed = timeSinceJumpPressed + Time.deltaTime;
         //gravity Force
-        vel = vel + new Vector3(0,-gravity,0)*Time.deltaTime;
+        vel = vel + new Vector2(0,-gravity)*Time.deltaTime;
 
-        CheckCollision();//also friction
+        CheckCollisionOnAxis(Vector3.right);//also friction
+        CheckCollisionOnAxis(Vector3.up);
 
         //Move the player
         //Update position reference
         animator.SetFloat("speed",vel.magnitude);
         if(playerPosition.Value.x>furthestCameraLeftBound.Value)
         {
-            playerPosition.Value = playerPosition.Value+(Vector2)vel*Time.deltaTime;
+            playerPosition.Value = playerPosition.Value+vel*Time.deltaTime;
         }else{
             if(vel.x < 0){
                 playerPosition.Value = playerPosition.Value+Vector2.up*vel.y*Time.deltaTime;
             }else{
                 //wait what
-                playerPosition.Value = playerPosition.Value+(Vector2)vel*Time.deltaTime;
+                playerPosition.Value = playerPosition.Value+vel*Time.deltaTime;
             }
         }
         
@@ -108,17 +109,14 @@ public class PlatformerController : MonoBehaviour
         transform.position = new Vector3(playerPosition.Value.x,playerPosition.Value.y,transform.position.z);
 
     }
-    void FixedUpdate()
-    {
-    //    levelParent.GetComponent<Rigidbody>().MovePosition(levelParent.position + Vector3.left*vel.x*Time.fixedDeltaTime);
-    }
     void CheckCollision()
     {
         Vector3 nextFrame = vel*Time.deltaTime;
-        RaycastHit hitInfo = new RaycastHit();
-        if(Physics.BoxCast(transform.position,transform.localScale/2,nextFrame,out hitInfo,Quaternion.identity,nextFrame.magnitude,layerMask))
+        RaycastHit2D hitInfo;
+        hitInfo = Physics2D.BoxCast((Vector2)transform.position,new Vector2(transform.localScale.x*0.8f,transform.localScale.y),0,nextFrame.normalized,nextFrame.magnitude,layerMask);
+        if(hitInfo.collider != null)
         {
-            if(Vector3.Angle(Vector3.up,hitInfo.normal) < resetAngle)//<90 vertical, <180 wall-reset
+            if(Vector2.Angle(Vector2.up,hitInfo.normal) < resetAngle)//<90 vertical, <180 wall-reset
             {
                 grounded = true;
                 timeSinceGrounded = 0;
@@ -132,19 +130,52 @@ public class PlatformerController : MonoBehaviour
                 grounded = false;
             }
 
-            Vector3 antiForce = Vector3.Project(vel,hitInfo.normal);
+            Vector3 antiForce = Vector3.Project((Vector3)vel,(Vector3)hitInfo.normal);
             // if(!didCoyote)
             // {
                 CheckFriction(hitInfo.normal);
             // }
             //
-            vel = vel - antiForce;
-
+            vel = vel - (Vector2)antiForce;
         }else
         {
             grounded = false;
         }
     }
+    void CheckCollisionOnAxis(Vector3 dir)
+    {
+        Vector3 nextFrame = Vector3.Project((Vector3)vel,dir)*Time.deltaTime;
+        RaycastHit2D hitInfo;
+        hitInfo = Physics2D.BoxCast((Vector2)transform.position,new Vector2(transform.localScale.x*0.8f,transform.localScale.y),0,nextFrame.normalized,nextFrame.magnitude,layerMask);
+        if(hitInfo.collider != null)
+        {
+            if(Vector2.Angle(Vector2.up,hitInfo.normal) < resetAngle)//<90 vertical, <180 wall-reset
+            {
+                grounded = true;
+                timeSinceGrounded = 0;
+                if(timeSinceJumpPressed < preCoyoteTime)
+                {
+                    //we meant to press the jump button JUST a moment ago, right before landing.
+                    StartCoroutine(JumpAtEndOfFrame());
+                    
+                }
+            }else{
+                grounded = false;
+            }
+
+            Vector3 antiForce = Vector3.Project((Vector3)vel,(Vector3)hitInfo.normal);
+            // if(!didCoyote)
+            // {
+                CheckFriction(hitInfo.normal);
+            // }
+            //
+            vel = vel - (Vector2)antiForce;
+        }else
+        {
+            grounded = false;
+        }
+    }
+
     void CheckFriction(Vector3 frictionNormal)
     {
         if(frictionNormal != Vector3.zero && !ignoreFriction)
@@ -158,7 +189,7 @@ public class PlatformerController : MonoBehaviour
                     //None of that vertical friction
                     fricV = Vector3.zero;
                 }
-                vel = vel-fricV*friction;
+                vel = vel-(Vector2)fricV*friction;
             }
         }
     }

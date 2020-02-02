@@ -1317,7 +1317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelState: {fileID: 11400000, guid: 07bb2fe74c29137488efa53b6a58ba33, type: 2}
-  blockPrefab: {fileID: 7224451554926650156, guid: e9a7da0e96d5a2644bc88df14c8acc2c,
+  blockPrefab: {fileID: 7224451554926650156, guid: 13160f700e8068349910a681d16d72ad,
     type: 3}
   allBlocks: []
 --- !u!4 &1393492229
