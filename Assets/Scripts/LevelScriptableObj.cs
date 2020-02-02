@@ -6,8 +6,8 @@ using UnityEngine;
 public class LevelScriptableObj : ScriptableObject
 {
     public const int ROW = 10;
-    public const int COL = 200;
-    public const int DEP = 1;
+    public const int COL = 50;
+    public const int DEP = 5;
     public const float cubeSize = 0.1f;
     public TextAsset level;
 
@@ -56,11 +56,14 @@ public class LevelScriptableObj : ScriptableObject
 
     public Vector3 getCubePos(int row, int col, int dep)
     {
+        var x = cubeSize / 2.0f + col * cubeSize;
+        var y = cubeSize / 2.0f + row * cubeSize;
+        var z = cubeSize / 2.0f + dep * cubeSize;
         if (Origin)
         {
-            return Origin.position + new Vector3(col * cubeSize, row * cubeSize, dep * cubeSize);
+            return Origin.position + new Vector3(x, y, z);
         }
-        return new Vector3(col * cubeSize, row * cubeSize, dep * cubeSize);
+        return new Vector3(x, y, z);
     }
 
     public bool hasCube(int row, int col, int dep)
@@ -82,6 +85,7 @@ public class LevelScriptableObj : ScriptableObject
                     var dist = Vector3.Distance(obj.position, getCubePos(i, j, k));
                     if (dist < minDist)
                     {
+                        // Debug.Log($"mindist{minDist}, objPos{obj.position}, cubePos{getCubePos(i, j, k)}, origin{Origin}");
                         minDist = dist;
                         minXYZ = new int[] { i, j, k };
                     }
@@ -90,7 +94,6 @@ public class LevelScriptableObj : ScriptableObject
         }
         return minXYZ;
     }
-
 
     public void generateRandomLayout()
     {
@@ -109,8 +112,9 @@ public class LevelScriptableObj : ScriptableObject
         clearLayout();
         foreach (Transform child in level.transform)
         {
+            // Debug.Log(child.gameObject.name);
             var closestCube = getClosestCube(child);
-            Debug.Log($"x{closestCube[0]},y{closestCube[1]},z{closestCube[2]}");
+            // Debug.Log($"x{closestCube[0]},y{closestCube[1]},z{closestCube[2]}");
             setCube(closestCube[0], closestCube[1], closestCube[2]);
         }
     }
@@ -134,12 +138,10 @@ public class LevelScriptableObj : ScriptableObject
             {
                 for (int k = 0; k < DEP; k++)
                 {
-                    _voxelStates[i,j,k] = 0;
-
+                    _voxelStates[i, j, k] = 0;
                 }
             }
         }
-
     }
 
     private Transform _origin;
