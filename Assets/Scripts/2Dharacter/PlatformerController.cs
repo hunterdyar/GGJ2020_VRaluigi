@@ -13,7 +13,6 @@ public class PlatformerController : MonoBehaviour
     Vector3 newLevelPos;
     public GameEvent OnDeathEvent;
     public FloatReference furthestCameraLeftBound;
-    public Transform levelParent;
     public Vector2Reference playerPosition;
     public float preCoyoteTime;
     public float postCoyoteTime;
