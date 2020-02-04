@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/LevelScriptableObject", order = 1)]
 public class LevelScriptableObj : ScriptableObject
 {
-    public const int ROW = 10;
-    public const int COL = 50;
+    public const int ROW = 5;
+    public const int COL = 100;
     public const int DEP = 1;
     public const float cubeSize = 0.1f;
     public TextAsset level;

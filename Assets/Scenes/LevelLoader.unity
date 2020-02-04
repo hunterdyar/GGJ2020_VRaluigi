@@ -300,8 +300,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneNamesToLoad:
-  - SampleScene
   - 2DTesting
+  - SampleScene
 --- !u!4 &1617641795
 Transform:
   m_ObjectHideFlags: 0
